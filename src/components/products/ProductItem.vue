@@ -23,7 +23,7 @@ export default {
   props: ['id', 'image', 'title', 'price', 'description'],
   methods: {
     addToCard() {
-      this.$store.dispatch('card/addToCard', {id: this.id})
+      this.$store.dispatch('card/addToCard', { id: this.id })
     }
   },
 };

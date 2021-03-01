@@ -1,7 +1,6 @@
 export default {
   namespaced: true,
-  state () {
-    return {
+  state: {
       products: [
         {
           id: 'p1',
@@ -30,15 +29,10 @@ export default {
           price: 6.99,
         },
       ],
-    };
   },
   getters: {
-    products(state) {
-      return state.products
-    }
+    products: (state) => state.products,
   },
-  mutations: {
-  },
-  actions: {
-  }
+  mutations: {},
+  actions: {}
 }

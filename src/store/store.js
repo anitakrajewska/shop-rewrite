@@ -8,31 +8,19 @@ const store = createStore({
     card: cardModule,
     prods: productsModule
   },
-  state () {
-    return {
-      isLoggedIn: false
-    };
+  state: {
+    isLoggedIn: false,
   },
   getters: {
-    isAuthenticated(state) {
-      return state.isLoggedIn
-    }
+    isAuthenticated: (state) => state.isLoggedIn,
   },
   mutations: {
-    login(state) {
-      state.isLoggedIn = true
-    },
-    logout(state) {
-      state.isLoggedIn = false
-    },
+    login: (state) => state.isLoggedIn = true,
+    logout: (state) => (state.isLoggedIn = false),
   },
   actions: {
-    login(ctx) {
-      ctx.commit('login')
-    },
-    logout(ctx) {
-      ctx.commit('logout')
-    }
+    login: (ctx) => ctx.commit('login'),
+    logout: (ctx) => ctx.commit('logout')
   }
 })
 
