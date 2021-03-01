@@ -15,15 +15,21 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import ProductItem from '../components/products/ProductItem.vue';
 
 export default {
   components: {
     ProductItem,
   },
-  computed: {
-    productsList() {
-      return this.$store.getters['prods/products']
+  setup() {
+    const store = useStore();
+
+    const productsList = computed(() => store.getters['prods/products']);
+
+    return {
+      productsList
     }
   }
 };

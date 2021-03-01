@@ -19,13 +19,47 @@
 </template>
 
 <script>
+import { useStore } from 'vuex';
+
 export default {
-  props: ['id', 'image', 'title', 'price', 'description'],
-  methods: {
-    addToCard() {
-      this.$store.dispatch('card/addToCard', { id: this.id })
+  props: {
+    id: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    description: {
+      type: String,
+      default: '',
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      default: 0,
+    },
+    qty: {
+      type: Number,
+      default: 0
     }
   },
+  setup(props) {
+    const store = useStore();
+
+    const addToCard = () => store.dispatch({
+      type: 'card/addToCard',
+      id: props.id
+    });
+
+    return {
+      addToCard
+    }
+  }
 };
 </script>
 

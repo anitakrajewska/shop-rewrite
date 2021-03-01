@@ -22,18 +22,46 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
-  props: ['prodId', 'title', 'image', 'price', 'qty'],
-  computed: {
-    itemTotal() {
-      return (this.price * this.qty).toFixed(2);
+  props: {
+    prodId: {
+      type: String,
+      required: true,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      default: 0,
+    },
+    qty: {
+      type: Number,
+      default: 0
     }
   },
-  methods: {
-    remove() {
-      this.$store.dispatch('card/removeFromCard', { productId: this.$props.prodId });
+  setup(props) {
+    const store = useStore();
+
+    const itemTotal = computed(() => (props.price * props.qty).toFixed(2));
+
+    const remove = () => {
+      store.dispatch('card/removeFromCard', { productId: props.prodId });
     }
-  }
+
+    return {
+      itemTotal,
+      remove
+    }
+  },
 };
 </script>
 

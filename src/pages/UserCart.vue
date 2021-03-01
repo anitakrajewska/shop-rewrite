@@ -17,18 +17,23 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import CartItem from '../components/cart/CartItem.vue';
 
 export default {
   components: {
     CartItem,
   },
-  computed: {
-    cartTotal() {
-      return this.$store.getters['card/totalSum']
-    },
-    cardItems() {
-      return this.$store.getters['card/products']
+  setup() {
+    const store = useStore();
+
+    const cartTotal = computed(() => store.getters['card/totalSum']);
+    const cardItems = computed(() => store.getters['card/products']);
+
+    return {
+      cartTotal,
+      cardItems
     }
   }
 };

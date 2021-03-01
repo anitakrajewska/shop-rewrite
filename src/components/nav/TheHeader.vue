@@ -25,22 +25,25 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
 export default {
-  computed: {
-    isLoggedIn() {
-      return this.$store.getters.isAuthenticated
-    },
-    cardQuantity() {
-      return this.$store.getters['card/quantity']
-    }
-  },
-  methods: {
-    login() {
-      this.$store.dispatch('login')
-    },
-    logout() {
-      this.$store.dispatch('logout')
-    }
+  setup() {
+    const store = useStore();
+
+    const isLoggedIn = computed(() => store.getters['auth/isAuthenticated']);
+    const cardQuantity = computed(() => store.getters['card/quantity']);
+
+    const login = () => store.dispatch('auth/login');
+    const logout = () => store.dispatch('auth/logout');
+
+    return {
+      isLoggedIn,
+      cardQuantity,
+      login,
+      logout
+    };
   }
 };
 </script>
