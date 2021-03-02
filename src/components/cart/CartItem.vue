@@ -16,14 +16,14 @@
         </div>
       </div>
       <div class="item__total">Total: ${{ itemTotal }}</div>
-      <button @click="remove">Remove</button>
+      <button @click="removeFromCard({productId: prodId})">Remove</button>
     </div>
   </li>
 </template>
 
 <script>
 import { computed } from 'vue';
-import { useStore } from 'vuex';
+import { mapActions } from 'vuex';
 
 export default {
   props: {
@@ -49,17 +49,18 @@ export default {
     }
   },
   setup(props) {
-    const store = useStore();
+    // const store = useStore();
 
     const itemTotal = computed(() => (props.price * props.qty).toFixed(2));
 
-    const remove = () => {
-      store.dispatch('card/removeFromCard', { productId: props.prodId });
-    }
+    // const remove = () => {
+    //   store.dispatch('card/removeFromCard', { productId: props.prodId });
+    // }
 
     return {
+      ...mapActions('card', ['removeFromCard']),
       itemTotal,
-      remove
+      // remove
     }
   },
 };
