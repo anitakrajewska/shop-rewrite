@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import ProductItem from '../components/products/ProductItem.vue';
 
@@ -27,6 +27,10 @@ export default {
     const store = useStore();
 
     const productsList = computed(() => store.getters['prods/products']);
+
+    onMounted(() => {
+      store.dispatch('prods/bindProducts');
+    })
 
     return {
       productsList

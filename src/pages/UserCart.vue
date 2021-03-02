@@ -26,7 +26,6 @@ export default {
     CartItem,
   },
   setup() {
-
     const store = useStore();
 
     const cartTotal = computed(() => store.getters['card/totalSum']);
