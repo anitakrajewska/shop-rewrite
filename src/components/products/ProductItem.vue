@@ -18,10 +18,11 @@
   </li>
 </template>
 
-<script>
+<script lang='ts'>
+import { defineComponent } from 'vue';
 import { useStore } from 'vuex';
 
-export default {
+export default defineComponent({
   props: {
     id: {
       type: String,
@@ -48,7 +49,7 @@ export default {
       default: 0
     }
   },
-  setup(props) {
+  setup: (props) => {
     const store = useStore();
 
     const addToCard = () => store.dispatch({
@@ -60,7 +61,7 @@ export default {
       addToCard
     }
   }
-};
+});
 </script>
 
 <style scoped>

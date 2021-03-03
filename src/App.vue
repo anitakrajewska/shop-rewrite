@@ -1,28 +1,26 @@
 <template>
-  <the-header></the-header>
-  <router-view></router-view>
+  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
 </template>
 
-<script>
-import TheHeader from './components/nav/TheHeader.vue';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import HelloWorld from './components/HelloWorld.vue';
 
-export default {
+export default defineComponent({
+  name: 'App',
   components: {
-    TheHeader
-  },
-};
+    HelloWorld
+  }
+});
 </script>
 
 <style>
-* {
-  box-sizing: border-box;
-}
-
-html {
-  font-family: sans-serif;
-}
-
-body {
-  margin: 0;
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>

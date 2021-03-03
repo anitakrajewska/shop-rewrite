@@ -17,15 +17,15 @@
 </template>
 
 <script>
-import { computed } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 import CartItem from '../components/cart/CartItem.vue';
 
-export default {
+export default defineComponent({
   components: {
     CartItem,
   },
-  setup() {
+  setup: () => {
     const store = useStore();
 
     const cartTotal = computed(() => store.getters['card/totalSum']);
@@ -36,7 +36,7 @@ export default {
       cardItems
     }
   }
-};
+});
 </script>
 
 <style scoped>

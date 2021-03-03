@@ -21,11 +21,11 @@
   </li>
 </template>
 
-<script>
-import { computed } from 'vue';
+<script lang='ts'>
+import { defineComponent, computed } from 'vue';
 import { mapActions } from 'vuex';
 
-export default {
+export default defineComponent({
   props: {
     prodId: {
       type: String,
@@ -48,13 +48,13 @@ export default {
       default: 0
     }
   },
-  setup(props) {
+  setup: (props) => {
     // const store = useStore();
 
     const itemTotal = computed(() => (props.price * props.qty).toFixed(2));
 
     // const remove = () => {
-    //   store.dispatch('card/removeFromCard', { productId: props.prodId });
+    //   store.dispatch('card/removeFromCard', { id: props.prodId });
     // }
 
     return {
@@ -63,7 +63,7 @@ export default {
       // remove
     }
   },
-};
+});
 </script>
 
 <style scoped>

@@ -1,4 +1,9 @@
-export default {
+import { RootState } from '@/types/store/root-state.d';
+import { CardState, CardItem } from '@/types/store/card-state.d';
+import { Product } from '@/types/store/products-state.d';
+import { ActionContext, Module } from 'vuex';
+
+const module: Module<CardState, RootState> = {
   namespaced: true,
   state: {
       items: [],
@@ -6,22 +11,22 @@ export default {
       qty: 0,
   },
   getters: {
-    products: (state) => state.items,
-    totalSum: (state) => state.total.toFixed(2),
-    quantity: (state) => state.qty,
+    products: (state: CardState) => state.items,
+    totalSum: (state: CardState) => state.total.toFixed(2),
+    quantity: (state: CardState) => state.qty,
   },
   mutations: {
-    addProductToCart: (state, payload) => {
+    addProductToCart: (state: CardState, payload: CardItem): void => {
       const productData = payload;
       const productInCartIndex = state.items.findIndex(
-        (ci) => ci.productId === productData.id
+        (ci) => ci.id === productData.id
       );
 
       if (productInCartIndex >= 0) {
         state.items[productInCartIndex].qty++;
       } else {
         const newItem = {
-          productId: productData.id,
+          id: productData.id,
           title: productData.title,
           image: productData.image,
           price: productData.price,
@@ -32,10 +37,10 @@ export default {
       state.qty++;
       state.total += productData.price;
     },
-    removeProductFromCart: (state, payload) => {
-      const prodId = payload.productId;
+    removeProductFromCart: (state: CardState, payload: CardItem): void => {
+      const prodId = payload.id;
       const productInCartIndex = state.items.findIndex(
-        (cartItem) => cartItem.productId === prodId
+        (cartItem) => cartItem.id === prodId
       );
       const prodData = state.items[productInCartIndex];
       state.items.splice(productInCartIndex, 1);
@@ -44,14 +49,16 @@ export default {
     },
   },
   actions: {
-    addToCard: (ctx, payload) => {
+    addToCard: (ctx: ActionContext<CardState, any>, payload: CardItem) => {
       const prodId = payload.id;
       const products = ctx.rootGetters['prods/products'];
-      const product = products.find(prod => prod.id === prodId);
+      const product = products.find((prod: Product) => prod.id === prodId);
       ctx.commit('addProductToCart', product)
     },
-    removeFromCard: (ctx, payload) => {
+    removeFromCard: (ctx: ActionContext<CardState, any>, payload: CardItem) => {
       ctx.commit('removeProductFromCart', payload)
     }
   }
 }
+
+export default module;

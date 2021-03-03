@@ -1,4 +1,8 @@
-export default {
+import { RootState } from '@/types/store/root-state.d';
+import { Product, ProductsState } from '@/types/store/products-state.d';
+import { ActionContext, Module } from 'vuex';
+
+const module: Module<ProductsState, RootState> = {
   namespaced: true,
   state: {
       products: [],
@@ -32,16 +36,15 @@ export default {
       // ],
   },
   getters: {
-    products: (state) => state.products,
+    products: (state: ProductsState) => state.products,
   },
   mutations: {
-    setProducts: (state, payload) => {
-      console.log(payload);
-        state.products = payload;
+    setProducts: (state: ProductsState, payload: Product[]) => {
+      state.products = payload;
     }
   },
   actions: {
-    bindProducts: async ({ commit }) => {
+    bindProducts: async (ctx: ActionContext<ProductsState, RootState>):Promise<void> => {
       // GET request using fetch with error handling
       await fetch("http://localhost:3002/products")
         .then(async (response) => {
@@ -53,12 +56,13 @@ export default {
             const error = (data && data.message) || response.statusText;
             return Promise.reject(error);
           }
-          commit('setProducts', data.products);
+          ctx.commit('setProducts', data.products);
         })
         .catch(error => {
-          this.errorMessage = error;
+          //this.errorMessage = error;
           console.error("There was an error!", error);
         });
     },
   }
 }
+export default module;

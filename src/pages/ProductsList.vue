@@ -14,16 +14,16 @@
   </section>
 </template>
 
-<script>
-import { computed, onMounted } from 'vue';
+<script lang='ts'>
+import { defineComponent, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import ProductItem from '../components/products/ProductItem.vue';
 
-export default {
+export default defineComponent({
   components: {
     ProductItem,
   },
-  setup() {
+  setup: () => {
     const store = useStore();
 
     const productsList = computed(() => store.getters['prods/products']);
@@ -36,7 +36,7 @@ export default {
       productsList
     }
   }
-};
+});
 </script>
 
 <style scoped>

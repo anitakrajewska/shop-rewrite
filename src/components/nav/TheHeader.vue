@@ -24,12 +24,12 @@
   </header>
 </template>
 
-<script>
-import { computed } from 'vue';
+<script lang='ts'>
+import { defineComponent, computed } from 'vue';
 import { useStore } from 'vuex';
 
-export default {
-  setup() {
+export default defineComponent({
+  setup: () => {
     const store = useStore();
 
     const isLoggedIn = computed(() => store.getters['auth/isAuthenticated']);
@@ -45,7 +45,7 @@ export default {
       logout
     };
   }
-};
+});
 </script>
 
 <style scoped>
