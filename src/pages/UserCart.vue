@@ -5,8 +5,8 @@
     <ul>
       <cart-item
         v-for="item in cardItems"
-        :key="item.productId"
-        :prod-id="item.productId"
+        :key="item.id"
+        :prod-id="item.id"
         :title="item.title"
         :image="item.image"
         :price="item.price"
