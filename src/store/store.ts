@@ -11,6 +11,6 @@ const store: StoreOptions<RootState> = createStore({
     prods: productsModule,
     auth: authenticationModule,
   },
-})
+});
 
 export default store;

@@ -5,7 +5,7 @@ import ShopAdmin from './pages/ShopAdmin.vue';
 
 const history = createWebHistory();
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   { path: '/', redirect: '/products' },
   { path: '/products', component: ProductsList },
   { path: '/cart', component: UserCart },
@@ -14,7 +14,7 @@ const routes = [
 
 const router = createRouter({
   history,
-  routes: routes as RouteRecordRaw[]
+  routes
 });
 
 export default router;

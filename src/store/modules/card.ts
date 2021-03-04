@@ -49,13 +49,13 @@ const module: Module<CardState, RootState> = {
     },
   },
   actions: {
-    addToCard: (ctx: ActionContext<CardState, any>, payload: CardItem) => {
+    addToCard: (ctx: ActionContext<CardState, RootState>, payload: CardItem): void => {
       const prodId = payload.id;
       const products = ctx.rootGetters['prods/products'];
       const product = products.find((prod: Product) => prod.id === prodId);
       ctx.commit('addProductToCart', product)
     },
-    removeFromCard: (ctx: ActionContext<CardState, any>, payload: CardItem) => {
+    removeFromCard: (ctx: ActionContext<CardState, RootState>, payload: CardItem): void => {
       ctx.commit('removeProductFromCart', payload)
     }
   }
